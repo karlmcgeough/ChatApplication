@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import MessengerKit
 
 class User {
     var id: String
@@ -40,5 +41,12 @@ class User {
             "profileImageUrl" : user.profileImageUrl
         ]
         return data
+    }
+    
+    struct Users: MSGUser {
+        var displayName: String
+        var avatar: UIImage?
+        var avatarUrl: URL?
+        var isSender: Bool
     }
 }

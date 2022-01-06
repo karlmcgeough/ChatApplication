@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		643FEFEC1BA991B2CC8FDAB0 /* Pods_wawaweewa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 578CAD7E1B2A0AFB8AA6B644 /* Pods_wawaweewa.framework */; };
 		7553EB8827862A140088650F /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7553EB8727862A140088650F /* IQKeyboardManagerSwift */; };
 		7586CEDC2785CC8E000BCF4C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7586CEDB2785CC8E000BCF4C /* AppDelegate.swift */; };
 		7586CEDE2785CC8E000BCF4C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7586CEDD2785CC8E000BCF4C /* SceneDelegate.swift */; };
@@ -33,9 +34,15 @@
 		7586CF1A27860E19000BCF4C /* FirestoreCollectionReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7586CF1927860E19000BCF4C /* FirestoreCollectionReference.swift */; };
 		7586CF1C27861C99000BCF4C /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7586CF1B27861C98000BCF4C /* Helpers.swift */; };
 		7586CF1E27862321000BCF4C /* CreateNewChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7586CF1D27862321000BCF4C /* CreateNewChatVC.swift */; };
+		B930CDC2278676BB00223703 /* chatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B930CDC1278676BB00223703 /* chatCell.swift */; };
+		B930CDC527867B6700223703 /* BottomSheetController in Frameworks */ = {isa = PBXBuildFile; productRef = B930CDC427867B6700223703 /* BottomSheetController */; };
+		B930CDC827867D8D00223703 /* ChatMessengerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B930CDC727867D8D00223703 /* ChatMessengerVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0D28FA9DB0F2C75C63C24A11 /* Pods-wawaweewa.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wawaweewa.debug.xcconfig"; path = "Target Support Files/Pods-wawaweewa/Pods-wawaweewa.debug.xcconfig"; sourceTree = "<group>"; };
+		42E48949A32D6882C5A003D2 /* Pods-wawaweewa.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wawaweewa.release.xcconfig"; path = "Target Support Files/Pods-wawaweewa/Pods-wawaweewa.release.xcconfig"; sourceTree = "<group>"; };
+		578CAD7E1B2A0AFB8AA6B644 /* Pods_wawaweewa.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_wawaweewa.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7586CED82785CC8E000BCF4C /* wawaweewa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wawaweewa.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7586CEDB2785CC8E000BCF4C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7586CEDD2785CC8E000BCF4C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -58,6 +65,8 @@
 		7586CF1927860E19000BCF4C /* FirestoreCollectionReference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreCollectionReference.swift; sourceTree = "<group>"; };
 		7586CF1B27861C98000BCF4C /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		7586CF1D27862321000BCF4C /* CreateNewChatVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewChatVC.swift; sourceTree = "<group>"; };
+		B930CDC1278676BB00223703 /* chatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chatCell.swift; sourceTree = "<group>"; };
+		B930CDC727867D8D00223703 /* ChatMessengerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessengerVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,9 +77,11 @@
 				7586CF0B2785E95C000BCF4C /* FirebaseMessaging in Frameworks */,
 				7586CF0D2785E95C000BCF4C /* FirebaseStorage in Frameworks */,
 				7586CF072785E95C000BCF4C /* FirebaseAuth in Frameworks */,
+				B930CDC527867B6700223703 /* BottomSheetController in Frameworks */,
 				7586CF092785E95C000BCF4C /* FirebaseFirestore in Frameworks */,
 				7586CF182786026C000BCF4C /* JGProgressHUD in Frameworks */,
 				7553EB8827862A140088650F /* IQKeyboardManagerSwift in Frameworks */,
+				643FEFEC1BA991B2CC8FDAB0 /* Pods_wawaweewa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -82,6 +93,8 @@
 			children = (
 				7586CEDA2785CC8E000BCF4C /* wawaweewa */,
 				7586CED92785CC8E000BCF4C /* Products */,
+				76E6275BE0A088C7FBC72CB6 /* Pods */,
+				ED7562CAB98C580747AF6F66 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -135,9 +148,11 @@
 		7586CEF92785D14D000BCF4C /* ChatVCs */ = {
 			isa = PBXGroup;
 			children = (
+				B930CDBF2786769A00223703 /* ChatCells */,
 				7586CEF62785D126000BCF4C /* MainChatVC.swift */,
 				7586CEFD2785D193000BCF4C /* MainChatVM.swift */,
 				7586CF1D27862321000BCF4C /* CreateNewChatVC.swift */,
+				B930CDC727867D8D00223703 /* ChatMessengerVC.swift */,
 			);
 			path = ChatVCs;
 			sourceTree = "<group>";
@@ -169,6 +184,31 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		76E6275BE0A088C7FBC72CB6 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				0D28FA9DB0F2C75C63C24A11 /* Pods-wawaweewa.debug.xcconfig */,
+				42E48949A32D6882C5A003D2 /* Pods-wawaweewa.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		B930CDBF2786769A00223703 /* ChatCells */ = {
+			isa = PBXGroup;
+			children = (
+				B930CDC1278676BB00223703 /* chatCell.swift */,
+			);
+			path = ChatCells;
+			sourceTree = "<group>";
+		};
+		ED7562CAB98C580747AF6F66 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				578CAD7E1B2A0AFB8AA6B644 /* Pods_wawaweewa.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -176,9 +216,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7586CEEC2785CC90000BCF4C /* Build configuration list for PBXNativeTarget "wawaweewa" */;
 			buildPhases = (
+				12D803CCB72D4C938F69C0AE /* [CP] Check Pods Manifest.lock */,
 				7586CED42785CC8E000BCF4C /* Sources */,
 				7586CED52785CC8E000BCF4C /* Frameworks */,
 				7586CED62785CC8E000BCF4C /* Resources */,
+				B9061C1F31CE2647244E5AE6 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -192,6 +234,7 @@
 				7586CF0C2785E95C000BCF4C /* FirebaseStorage */,
 				7586CF172786026C000BCF4C /* JGProgressHUD */,
 				7553EB8727862A140088650F /* IQKeyboardManagerSwift */,
+				B930CDC427867B6700223703 /* BottomSheetController */,
 			);
 			productName = wawaweewa;
 			productReference = 7586CED82785CC8E000BCF4C /* wawaweewa.app */;
@@ -225,6 +268,7 @@
 				7586CF052785E95C000BCF4C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				7586CF162786026B000BCF4C /* XCRemoteSwiftPackageReference "JGProgressHUD" */,
 				7553EB8627862A130088650F /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
+				B930CDC327867B6700223703 /* XCRemoteSwiftPackageReference "BottomSheetController" */,
 			);
 			productRefGroup = 7586CED92785CC8E000BCF4C /* Products */;
 			projectDirPath = "";
@@ -249,6 +293,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		12D803CCB72D4C938F69C0AE /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-wawaweewa-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B9061C1F31CE2647244E5AE6 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-wawaweewa/Pods-wawaweewa-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-wawaweewa/Pods-wawaweewa-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-wawaweewa/Pods-wawaweewa-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		7586CED42785CC8E000BCF4C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -268,7 +354,9 @@
 				7586CF152785F4B8000BCF4C /* RegisterVM.swift in Sources */,
 				7586CEF02785D0D8000BCF4C /* LoginVC.swift in Sources */,
 				7586CF0F2785E9F6000BCF4C /* User.swift in Sources */,
+				B930CDC2278676BB00223703 /* chatCell.swift in Sources */,
 				7586CF1C27861C99000BCF4C /* Helpers.swift in Sources */,
+				B930CDC827867D8D00223703 /* ChatMessengerVC.swift in Sources */,
 				7586CEF52785D109000BCF4C /* ForgotPasswordVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -413,6 +501,7 @@
 		};
 		7586CEED2785CC90000BCF4C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0D28FA9DB0F2C75C63C24A11 /* Pods-wawaweewa.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -442,6 +531,7 @@
 		};
 		7586CEEE2785CC90000BCF4C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 42E48949A32D6882C5A003D2 /* Pods-wawaweewa.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -517,6 +607,14 @@
 				minimumVersion = 2.0.0;
 			};
 		};
+		B930CDC327867B6700223703 /* XCRemoteSwiftPackageReference "BottomSheetController" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/naru-jpn/BottomSheetController";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -549,6 +647,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 7586CF162786026B000BCF4C /* XCRemoteSwiftPackageReference "JGProgressHUD" */;
 			productName = JGProgressHUD;
+		};
+		B930CDC427867B6700223703 /* BottomSheetController */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B930CDC327867B6700223703 /* XCRemoteSwiftPackageReference "BottomSheetController" */;
+			productName = BottomSheetController;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

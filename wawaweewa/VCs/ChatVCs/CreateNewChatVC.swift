@@ -8,22 +8,37 @@
 import UIKit
 
 class CreateNewChatVC: UIViewController {
-
+    
     //MARK: Outlets
     @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var chatNameTxt: UITextField!
     @IBOutlet weak var createChatBtn: UIButton!
     
     //MARK: Vars
-    
+    var vm = MainChatVM()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
     }
-
+    
     @IBAction func createChatAction(_ sender: Any) {
+        if chatNameTxt.text != "" {
+            vm.createNewChat(chatName: chatNameTxt.text!, view: view) { postSuccess in
+                if postSuccess {
+                    Helpers.performAfter(2.0) {
+                        self.dismiss(animated: true, completion: nil)
+                    }
+                    print("New chat posted")
+                }else {
+                    print("chat not posted")
+                }
+            }
+        }else {
+            UIHelpers.errorAlert(message: "Please enter a chat name", delay: 1.5, view: self.view)
+        }
     }
+    
     @IBAction func closeAction(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }

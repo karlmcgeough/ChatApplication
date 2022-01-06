@@ -1,0 +1,6 @@
+framework module Pods_wawaweewa {
+  umbrella header "Pods-wawaweewa-umbrella.h"
+
+  export *
+  module * { export * }
+}
