@@ -12,6 +12,7 @@ import FirebaseFirestore
 enum fCollectionReference: String {
     case User
     case Chat
+    case Messages
 }
 //MARK: Firebase reference
 func FirebaseReference(_ collectionReference: fCollectionReference) ->

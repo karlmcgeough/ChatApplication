@@ -70,7 +70,15 @@ extension MainChatVC {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "chatMessengerSW", sender: self)
+//         chatArray[indexPath.row]
+//        performSegue(withIdentifier: "chatMessengerSW", sender: self)
+        showChatView(chatArray[indexPath.row])
     }
     
+    private func showChatView(_ chat: Chat){
+        let messengerVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(identifier: "messengerVC") as! MessengerVC
+            
+        messengerVC.chat = chat
+        self.navigationController!.pushViewController(messengerVC, animated: true)
+    }
 }

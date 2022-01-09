@@ -42,11 +42,4 @@ class User {
         ]
         return data
     }
-    
-    struct Users: MSGUser {
-        var displayName: String
-        var avatar: UIImage?
-        var avatarUrl: URL?
-        var isSender: Bool
-    }
 }
