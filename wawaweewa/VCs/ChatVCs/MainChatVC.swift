@@ -70,8 +70,7 @@ extension MainChatVC {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//         chatArray[indexPath.row]
-//        performSegue(withIdentifier: "chatMessengerSW", sender: self)
+
         showChatView(chatArray[indexPath.row])
     }
     

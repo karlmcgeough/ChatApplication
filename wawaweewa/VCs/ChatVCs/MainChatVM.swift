@@ -35,13 +35,13 @@ class MainChatVM {
 //Create New Chat methods
 extension MainChatVM {
     
-    func createNewChat(chatName: String, view: UIView, _ completion: @escaping ((Bool)-> Void)) {
+    func createNewChat(chatName: String, chatPasscode: String, view: UIView, _ completion: @escaping ((Bool)-> Void)) {
         let chatId = UUID().uuidString
         let userId = Auth.auth().currentUser?.uid
         var userIds : [String] = []
         userIds.append(userId!)
-        let chatDetails = Chat.init(id: chatId, users: userIds , chatName: chatName)
-        
+       
+        let chatDetails = Chat.init(id: chatId, users: userIds, chatName: chatName, passcode: chatPasscode)
         self.saveNewChat(chat: chatDetails, view: view) { postSuccess in
             if postSuccess {
                 completion(true)

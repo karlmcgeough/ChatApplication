@@ -32,6 +32,9 @@ class MessengerVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UI
         if messageTxtView.text != "" {
             vm.createMessage(messageText: messageTxtView.text, chatId: chat.id, view: view) { success in
                 if success {
+                    self.messageTxtView.text = "Write something here.."
+                    self.messageTxtView.textColor = UIColor.lightGray
+                    self.messageSendBtn.isEnabled = false
                     print("posted")
                 }else {
                     print("Error")
@@ -84,17 +87,16 @@ extension MessengerVC {
         let recievedCell = messagesTableView.dequeueReusableCell(withIdentifier: "recievedCell", for: indexPath) as? RecievedCell
         
         if messageArray[indexPath.row].sentById == Auth.auth().currentUser?.uid {
-            youCell!.bubbleView.layer.cornerRadius = 10
+            youCell!.bubbleView.roundDifferentCorners([.bottomRight, .topLeft, .topRight], radius: 5)
             youCell?.messageTextLbl.text = messageArray[indexPath.row].messageText
             return youCell!
         }else {
-            recievedCell?.bubbleView.layer.cornerRadius = 10
+            recievedCell?.bubbleView.roundDifferentCorners([.bottomLeft, .topLeft, .topRight], radius: 5)
             recievedCell!.messageTextLbl.text = messageArray[indexPath.row].messageText
             recievedCell?.sendByLbl.text = messageArray[indexPath.row].sentByName
             return recievedCell!
         }
-        
-        return youCell!
+
     }
 }
 
@@ -104,7 +106,7 @@ extension MessengerVC {
     func getMessages() {
         let chatId = chat.id
         
-        self.listener = FirebaseReference(.Messages).whereField("chatId", isEqualTo: chatId).addSnapshotListener({ snapshot, err in
+        self.listener = FirebaseReference(.Messages).whereField("chatId", isEqualTo: chatId).order(by: "timeStamp", descending: true).addSnapshotListener({ snapshot, err in
             if let error = err {
                 debugPrint(error.localizedDescription)
                 return

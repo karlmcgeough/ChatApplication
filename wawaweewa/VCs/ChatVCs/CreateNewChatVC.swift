@@ -13,6 +13,7 @@ class CreateNewChatVC: UIViewController {
     @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var chatNameTxt: UITextField!
     @IBOutlet weak var createChatBtn: UIButton!
+    @IBOutlet weak var chatPasscode: UITextField!
     
     //MARK: Vars
     var vm = MainChatVM()
@@ -23,8 +24,8 @@ class CreateNewChatVC: UIViewController {
     }
     
     @IBAction func createChatAction(_ sender: Any) {
-        if chatNameTxt.text != "" {
-            vm.createNewChat(chatName: chatNameTxt.text!, view: view) { postSuccess in
+        if chatNameTxt.text != "" && chatPasscode.text != "" {
+            vm.createNewChat(chatName: chatNameTxt.text!, chatPasscode: chatPasscode.text!, view: view) { postSuccess in
                 if postSuccess {
                     Helpers.performAfter(2.0) {
                         self.dismiss(animated: true, completion: nil)
@@ -35,7 +36,7 @@ class CreateNewChatVC: UIViewController {
                 }
             }
         }else {
-            UIHelpers.errorAlert(message: "Please enter a chat name", delay: 1.5, view: self.view)
+            UIHelpers.errorAlert(message: "Please enter a chat name & Passcode", delay: 1.5, view: self.view)
         }
     }
     

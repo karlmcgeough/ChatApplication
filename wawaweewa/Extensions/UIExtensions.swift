@@ -46,11 +46,11 @@ extension UIButton {
     }
     
     func setButtonWithBorder(borderColour: UIColor, radius: Int, backgroundColour: UIColor) {
-         layer.backgroundColor = backgroundColour.cgColor
-         layer.cornerRadius = CGFloat(radius)
-         layer.borderWidth = 1
-         layer.borderColor = borderColour.cgColor
-     }
+        layer.backgroundColor = backgroundColour.cgColor
+        layer.cornerRadius = CGFloat(radius)
+        layer.borderWidth = 1
+        layer.borderColor = borderColour.cgColor
+    }
 }
 
 extension UIView {
@@ -65,34 +65,51 @@ extension UIView {
     }
     
     func roundCorners(_ corners: UIRectCorner, radius: CGFloat) {
-            let maskPath = UIBezierPath(
+        let maskPath = UIBezierPath(
+            roundedRect: bounds,
+            byRoundingCorners: corners,
+            cornerRadii: CGSize(width: radius, height: radius))
+        
+        let shape = CAShapeLayer()
+        shape.path = maskPath.cgPath
+        layer.mask = shape
+    }
+    
+    func roundDifferentCorners(_ corners: UIRectCorner, radius: CGFloat) {
+        if #available(iOS 11.0, *) {
+            clipsToBounds = true
+            layer.cornerRadius = radius
+            layer.maskedCorners = CACornerMask(rawValue: corners.rawValue)
+        } else {
+            let path = UIBezierPath(
                 roundedRect: bounds,
                 byRoundingCorners: corners,
-                cornerRadii: CGSize(width: radius, height: radius))
-
-            let shape = CAShapeLayer()
-            shape.path = maskPath.cgPath
-            layer.mask = shape
+                cornerRadii: CGSize(width: radius, height: radius)
+            )
+            let mask = CAShapeLayer()
+            mask.path = path.cgPath
+            layer.mask = mask
         }
+    }
 }
 
 extension UITableViewCell {
     func shadowDecorate(radius: CGFloat = 8,
-                           shadowColor: UIColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.3),
-                           shadowOffset: CGSize = CGSize(width: 0, height: 1.0),
-                           shadowRadius: CGFloat = 3,
-                           shadowOpacity: Float = 1) {
-           contentView.layer.cornerRadius = radius
-           contentView.layer.borderWidth = 1
-           contentView.layer.borderColor = UIColor.clear.cgColor
-           contentView.layer.masksToBounds = true
-
-           layer.shadowColor = shadowColor.cgColor
-           layer.shadowOffset = shadowOffset
-           layer.shadowRadius = shadowRadius
-           layer.shadowOpacity = shadowOpacity
-           layer.masksToBounds = false
-           layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: radius).cgPath
-           layer.cornerRadius = radius
-       }
-   }
+                        shadowColor: UIColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.3),
+                        shadowOffset: CGSize = CGSize(width: 0, height: 1.0),
+                        shadowRadius: CGFloat = 3,
+                        shadowOpacity: Float = 1) {
+        contentView.layer.cornerRadius = radius
+        contentView.layer.borderWidth = 1
+        contentView.layer.borderColor = UIColor.clear.cgColor
+        contentView.layer.masksToBounds = true
+        
+        layer.shadowColor = shadowColor.cgColor
+        layer.shadowOffset = shadowOffset
+        layer.shadowRadius = shadowRadius
+        layer.shadowOpacity = shadowOpacity
+        layer.masksToBounds = false
+        layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: radius).cgPath
+        layer.cornerRadius = radius
+    }
+}

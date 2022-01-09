@@ -11,24 +11,28 @@ class Chat {
     var id: String
     var users: [String]
     var chatName: String
+    var passcode: String
     
-    init(id: String = "", users: [String] = [], chatName: String = "") {
+    init(id: String = "", users: [String] = [], chatName: String = "", passcode: String = "") {
         self.id = id
         self.users = users
         self.chatName = chatName
+        self.passcode = passcode
     }
     
     init(data: [String:Any]) {
         self.id = data["id"] as? String ?? ""
         self.users = data["users"] as? [String] ?? []
         self.chatName = data["chatName"] as? String ?? ""
+        self.passcode = data["passcode"] as? String ?? ""
     }
     
     static func modelToData(chat: Chat) -> [String:Any] {
         let data : [String: Any] = [
             "id" : chat.id,
             "users" : chat.users,
-            "chatName" : chat.chatName
+            "chatName" : chat.chatName,
+            "passcode" : chat.passcode
         ]
         return data
     }

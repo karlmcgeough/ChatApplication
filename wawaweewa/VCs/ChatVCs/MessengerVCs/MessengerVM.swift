@@ -12,22 +12,31 @@ import SwiftUI
 
 class MessengerVM {
     
+    var user = User()
+    
     func createMessage(messageText: String, chatId: String,view: UIView, _ completion: @escaping ((Bool)-> Void)) {
-        let id = UUID().uuidString
-        let postedById = (Auth.auth().currentUser?.uid)!
-        let postedByName = User.init().username
-        let timestamp = Timestamp()
-        let message = messageText
-        
-        let messageDetails = Message.init(id: id, chatId: chatId, sentById: postedById, sentByName: postedByName, messageText: message, timestamp: timestamp)
-        
-        self.postMessage(message: messageDetails, view: view) { success in
-            if success {
-                completion(true)
+        getCurrentUser { completed in
+            if completed {
+                let id = UUID().uuidString
+                let postedById = (Auth.auth().currentUser?.uid)!
+                let postedByName = self.user.username
+                let timestamp = Timestamp()
+                let message = messageText
+                
+                let messageDetails = Message.init(id: id, chatId: chatId, sentById: postedById, sentByName: postedByName, messageText: message, timestamp: timestamp)
+                
+                self.postMessage(message: messageDetails, view: view) { success in
+                    if success {
+                        completion(true)
+                    }else {
+                        print("Error posting message")
+                    }
+                }
             }else {
-                print("Error posting message")
+                print("Cannot get user")
             }
         }
+        
     }
     
     private func postMessage(message: Message, view: UIView, _ completion: @escaping ((Bool) -> Void)) {
@@ -39,6 +48,21 @@ class MessengerVM {
             }else {
                 print("Posted")
                 completion(true)
+            }
+        }
+    }
+    
+    func getCurrentUser(_ completion: @escaping (Bool) -> Void) {
+        let userId = Auth.auth().currentUser?.uid
+        FirebaseReference(.User).document(userId!).getDocument { snap, err in
+            guard let snapshot = snap else {return}
+            
+            if snapshot.exists {
+                let data = snapshot.data()
+                self.user = User.init(data: data!)
+                completion(true)
+            }else {
+                print(err?.localizedDescription)
             }
         }
     }
