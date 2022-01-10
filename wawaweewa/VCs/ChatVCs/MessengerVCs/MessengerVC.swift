@@ -48,7 +48,7 @@ class MessengerVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UI
         messagesTableView.delegate = self
         messagesTableView.dataSource = self
         self.navigationItem.title = chat.chatName
-        messageTxtView.layer.borderColor = UIColor.lightGray.cgColor
+        messageTxtView.layer.borderColor = UIColor(named: "tealBlueColour")?.cgColor
         messageTxtView.layer.borderWidth = 1.0
         messageTxtView.layer.cornerRadius = 10
         messageTxtView.delegate = self
@@ -106,7 +106,7 @@ extension MessengerVC {
     func getMessages() {
         let chatId = chat.id
         
-        self.listener = FirebaseReference(.Messages).whereField("chatId", isEqualTo: chatId).order(by: "timeStamp", descending: true).addSnapshotListener({ snapshot, err in
+        self.listener = FirebaseReference(.Messages).whereField("chatId", isEqualTo: chatId).order(by: "timeStamp", descending: false).addSnapshotListener({ snapshot, err in
             if let error = err {
                 debugPrint(error.localizedDescription)
                 return
