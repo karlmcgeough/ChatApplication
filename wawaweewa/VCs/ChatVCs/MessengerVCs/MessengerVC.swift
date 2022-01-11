@@ -7,6 +7,7 @@
 
 import UIKit
 import Firebase
+import BottomSheetController
 
 class MessengerVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITableViewDataSource {
 
@@ -20,13 +21,14 @@ class MessengerVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UI
     var vm = MessengerVM()
     var chat: Chat!
     var messageArray: [Message] = []
+    let currentUser = Auth.auth().currentUser?.uid
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-        getMessages()
+        updateChatCheckPasscode()
     }
-    
+
     //Actions
     @IBAction func messageSendAction(_ sender: Any) {
         if messageTxtView.text != "" {
@@ -41,6 +43,10 @@ class MessengerVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UI
                 }
             }
         }
+    }
+    
+    @IBAction func manageChatAction(_ sender: Any) {
+        showManageChatView()
     }
     
     //Methods
@@ -74,6 +80,55 @@ class MessengerVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UI
             messageTxtView.textColor = UIColor.lightGray
         }
     }
+    
+    func showManageChatView() {
+        let storyboard = UIStoryboard(name: "Main", bundle: .main)
+        guard let viewController = storyboard.instantiateViewController(identifier: "ManageChatView") as? ManageChatView else {
+            return
+        }
+        viewController.chat = chat
+        let bottomSheetController = BottomSheetController(contentViewController: viewController)
+        present(bottomSheetController, animated: true)
+    }
+    
+    private func showEnterPasscodeView(_ chat: Chat) {
+        let storyboard = UIStoryboard(name: "Main", bundle: .main)
+        guard let viewController = storyboard.instantiateViewController(identifier: "PasscodeCheckView") as? PasscodeCheckView else {
+            return
+        }
+        viewController.chat = chat
+        viewController.callBackClosure = { [weak self] in
+            self?.updateChatCheckPasscode()
+        }
+        let bottomSheetController = BottomSheetController(contentViewController: viewController)
+        present(bottomSheetController, animated: true)
+    }
+    
+    private func checkShowPasscode() {
+        if chat.users.contains(currentUser!) {
+           getMessages()
+        } else {
+            showEnterPasscodeView(chat)
+        }
+    }
+    
+    private func getUpdatedChat(_ completion: @escaping ((Bool) -> Void)) {
+        vm.getChat(chatId: chat.id) { chats in
+            self.chat = chats
+            completion(true)
+        }
+    }
+    
+    private func updateChatCheckPasscode() {
+        getUpdatedChat { success in
+            if success {
+                self.checkShowPasscode()
+            } else {
+                print("Error")
+            }
+        }
+    }
+    
 }
 
 //Table view methods

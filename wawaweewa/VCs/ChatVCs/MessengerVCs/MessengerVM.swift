@@ -13,6 +13,7 @@ import SwiftUI
 class MessengerVM {
     
     var user = User()
+    var chat = Chat()
     
     func createMessage(messageText: String, chatId: String,view: UIView, _ completion: @escaping ((Bool)-> Void)) {
         getCurrentUser { completed in
@@ -61,6 +62,22 @@ class MessengerVM {
                 let data = snapshot.data()
                 self.user = User.init(data: data!)
                 completion(true)
+            }else {
+                print(err?.localizedDescription)
+            }
+        }
+    }
+    
+    func getChat(chatId: String, _ completion: @escaping (_ chats: Chat) -> Void) {
+        let chatId = chatId
+        
+        FirebaseReference(.Chat).document(chatId).getDocument { snap, err in
+            guard let snapshot = snap else {return}
+            
+            if snapshot.exists {
+                let data = snapshot.data()
+                self.chat = Chat.init(data: data!)
+                completion(self.chat)
             }else {
                 print(err?.localizedDescription)
             }

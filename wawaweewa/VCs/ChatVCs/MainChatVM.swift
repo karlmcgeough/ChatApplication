@@ -40,8 +40,8 @@ extension MainChatVM {
         let userId = Auth.auth().currentUser?.uid
         var userIds : [String] = []
         userIds.append(userId!)
-       
-        let chatDetails = Chat.init(id: chatId, users: userIds, chatName: chatName, passcode: chatPasscode)
+        
+        let chatDetails = Chat.init(id: chatId, users: userIds, chatName: chatName, passcode: chatPasscode, ownerId: userId!)
         self.saveNewChat(chat: chatDetails, view: view) { postSuccess in
             if postSuccess {
                 completion(true)

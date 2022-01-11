@@ -42,6 +42,11 @@
 		B930CDC2278676BB00223703 /* chatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B930CDC1278676BB00223703 /* chatCell.swift */; };
 		B930CDC527867B6700223703 /* BottomSheetController in Frameworks */ = {isa = PBXBuildFile; productRef = B930CDC427867B6700223703 /* BottomSheetController */; };
 		B930CDC827867D8D00223703 /* ChatMessengerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B930CDC727867D8D00223703 /* ChatMessengerVC.swift */; };
+		B9FB8424278CA96C002BF098 /* ManageChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FB8423278CA96C002BF098 /* ManageChatView.swift */; };
+		B9FB8426278CAD22002BF098 /* PasscodeCheckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FB8425278CAD22002BF098 /* PasscodeCheckView.swift */; };
+		B9FB8428278CE0EC002BF098 /* ChatMembersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FB8427278CE0EC002BF098 /* ChatMembersView.swift */; };
+		B9FB842B278CE4AF002BF098 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = B9FB842A278CE4AF002BF098 /* Kingfisher */; };
+		B9FB842D278CE790002BF098 /* MembersCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FB842C278CE78F002BF098 /* MembersCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,6 +83,10 @@
 		B930CDC1278676BB00223703 /* chatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chatCell.swift; sourceTree = "<group>"; };
 		B930CDC727867D8D00223703 /* ChatMessengerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessengerVC.swift; sourceTree = "<group>"; };
 		B9C4E114278B539A00162EA4 /* wawaweewa.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = wawaweewa.entitlements; sourceTree = "<group>"; };
+		B9FB8423278CA96C002BF098 /* ManageChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageChatView.swift; sourceTree = "<group>"; };
+		B9FB8425278CAD22002BF098 /* PasscodeCheckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasscodeCheckView.swift; sourceTree = "<group>"; };
+		B9FB8427278CE0EC002BF098 /* ChatMembersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMembersView.swift; sourceTree = "<group>"; };
+		B9FB842C278CE78F002BF098 /* MembersCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MembersCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +97,7 @@
 				7586CF0B2785E95C000BCF4C /* FirebaseMessaging in Frameworks */,
 				7586CF0D2785E95C000BCF4C /* FirebaseStorage in Frameworks */,
 				7586CF072785E95C000BCF4C /* FirebaseAuth in Frameworks */,
+				B9FB842B278CE4AF002BF098 /* Kingfisher in Frameworks */,
 				B930CDC527867B6700223703 /* BottomSheetController in Frameworks */,
 				7586CF092785E95C000BCF4C /* FirebaseFirestore in Frameworks */,
 				7586CF182786026C000BCF4C /* JGProgressHUD in Frameworks */,
@@ -105,6 +115,8 @@
 				75813AF2278B292600917015 /* MessengerCells */,
 				75813AEB278B1FAD00917015 /* MessengerVC.swift */,
 				75813AED278B276500917015 /* MessengerVM.swift */,
+				B9FB8423278CA96C002BF098 /* ManageChatView.swift */,
+				B9FB8427278CE0EC002BF098 /* ChatMembersView.swift */,
 			);
 			path = MessengerVCs;
 			sourceTree = "<group>";
@@ -114,6 +126,7 @@
 			children = (
 				75813AF3278B296600917015 /* YouCell.swift */,
 				75813AF5278B298B00917015 /* RecievedCell.swift */,
+				B9FB842C278CE78F002BF098 /* MembersCell.swift */,
 			);
 			path = MessengerCells;
 			sourceTree = "<group>";
@@ -185,6 +198,7 @@
 				7586CEFD2785D193000BCF4C /* MainChatVM.swift */,
 				7586CF1D27862321000BCF4C /* CreateNewChatVC.swift */,
 				B930CDC727867D8D00223703 /* ChatMessengerVC.swift */,
+				B9FB8425278CAD22002BF098 /* PasscodeCheckView.swift */,
 			);
 			path = ChatVCs;
 			sourceTree = "<group>";
@@ -268,6 +282,7 @@
 				7586CF172786026C000BCF4C /* JGProgressHUD */,
 				7553EB8727862A140088650F /* IQKeyboardManagerSwift */,
 				B930CDC427867B6700223703 /* BottomSheetController */,
+				B9FB842A278CE4AF002BF098 /* Kingfisher */,
 			);
 			productName = wawaweewa;
 			productReference = 7586CED82785CC8E000BCF4C /* wawaweewa.app */;
@@ -302,6 +317,7 @@
 				7586CF162786026B000BCF4C /* XCRemoteSwiftPackageReference "JGProgressHUD" */,
 				7553EB8627862A130088650F /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 				B930CDC327867B6700223703 /* XCRemoteSwiftPackageReference "BottomSheetController" */,
+				B9FB8429278CE4AF002BF098 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = 7586CED92785CC8E000BCF4C /* Products */;
 			projectDirPath = "";
@@ -376,6 +392,7 @@
 				75813AEE278B276500917015 /* MessengerVM.swift in Sources */,
 				7586CEFE2785D193000BCF4C /* MainChatVM.swift in Sources */,
 				7586CEDC2785CC8E000BCF4C /* AppDelegate.swift in Sources */,
+				B9FB8424278CA96C002BF098 /* ManageChatView.swift in Sources */,
 				7586CEF72785D126000BCF4C /* MainChatVC.swift in Sources */,
 				7586CF022785D1C9000BCF4C /* UIExtensions.swift in Sources */,
 				7586CF002785D1BE000BCF4C /* UIHelpers.swift in Sources */,
@@ -388,12 +405,15 @@
 				7586CEDE2785CC8E000BCF4C /* SceneDelegate.swift in Sources */,
 				7586CF132785F4A9000BCF4C /* LoginVM.swift in Sources */,
 				7586CF152785F4B8000BCF4C /* RegisterVM.swift in Sources */,
+				B9FB8428278CE0EC002BF098 /* ChatMembersView.swift in Sources */,
 				7586CEF02785D0D8000BCF4C /* LoginVC.swift in Sources */,
 				7586CF0F2785E9F6000BCF4C /* User.swift in Sources */,
+				B9FB842D278CE790002BF098 /* MembersCell.swift in Sources */,
 				B930CDC2278676BB00223703 /* chatCell.swift in Sources */,
 				7586CF1C27861C99000BCF4C /* Helpers.swift in Sources */,
 				B930CDC827867D8D00223703 /* ChatMessengerVC.swift in Sources */,
 				75813AF4278B296600917015 /* YouCell.swift in Sources */,
+				B9FB8426278CAD22002BF098 /* PasscodeCheckView.swift in Sources */,
 				75813AEC278B1FAD00917015 /* MessengerVC.swift in Sources */,
 				7586CEF52785D109000BCF4C /* ForgotPasswordVC.swift in Sources */,
 			);
@@ -655,6 +675,14 @@
 				kind = branch;
 			};
 		};
+		B9FB8429278CE4AF002BF098 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -692,6 +720,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B930CDC327867B6700223703 /* XCRemoteSwiftPackageReference "BottomSheetController" */;
 			productName = BottomSheetController;
+		};
+		B9FB842A278CE4AF002BF098 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B9FB8429278CE4AF002BF098 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
