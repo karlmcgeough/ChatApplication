@@ -22,7 +22,7 @@ class MessengerVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UI
     var chat: Chat!
     var messageArray: [Message] = []
     let currentUser = Auth.auth().currentUser?.uid
-    var fcmTokenArray : [String] = []
+    var tokens: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,24 +31,23 @@ class MessengerVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UI
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        vm.getFCMTokenArray { tokenArray in
-            self.fcmTokenArray = tokenArray
-        }
-        print(fcmTokenArray)
+
     }
 
     //Actions
     @IBAction func messageSendAction(_ sender: Any) {
         if messageTxtView.text != "" {
-            vm.createMessage(messageText: messageTxtView.text, chatId: chat.id,tokenArray: fcmTokenArray, view: view) { success in
-                if success {
-                    self.messageTxtView.text = "Write something here.."
-                    self.messageTxtView.textColor = UIColor.lightGray
-                    self.messageSendBtn.isEnabled = false
-                    self.view.endEditing(true)
-                    print("posted")
-                }else {
-                    print("Error")
+            vm.getFCMTokenArray { tokenArray in
+                self.vm.createMessage(messageText: self.messageTxtView.text, chatId: self.chat.id,tokenArray: tokenArray, view: self.view) { success in
+                    if success {
+                        self.messageTxtView.text = "Write something here.."
+                        self.messageTxtView.textColor = UIColor.lightGray
+                        self.messageSendBtn.isEnabled = false
+                        self.view.endEditing(true)
+                        print("posted")
+                    }else {
+                        print("Error")
+                    }
                 }
             }
         }

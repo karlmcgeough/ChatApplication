@@ -77,15 +77,16 @@ class MessengerVM {
     
     func getFCMTokenArray(_ completion: @escaping (_ tokenArray: [String]) -> Void) {
         var fcmTokens: [String] = []
+        var usersArray: [User] = []
         getUsers { users in
-            for user in users {
-                for id in self.chat.users {
-                    if user.id == id {
-                        fcmTokens.append(user.fcmToken)
-                    }
+            usersArray = users
+        }
+        for user in usersArray {
+            for id in self.chat.users {
+                if user.id == id {
+                    fcmTokens.append(user.fcmToken)
                 }
             }
-           
         }
         completion(fcmTokens)
     }
