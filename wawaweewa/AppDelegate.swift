@@ -18,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        //UNUserNotificationCenter.current().delegate = self
         IQKeyboardManager.shared.enable = true
         FirebaseApp.configure()
         return true
@@ -37,5 +38,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
 
+//    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+//        let userInfo = response.notification.request.content.userInfo
+//        if let chatID = userInfo["user"] as? String {
+//            // here you can instantiate / select the viewController and present it
+//            print(chatID)
+//            guard let window = UIApplication.shared.keyWindow else {return}
+//
+//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//
+//            let chatVC = storyboard.instantiateViewController(withIdentifier: "messengerVC") as! MessengerVC
+//            chatVC.chatId = chatID
+//            let navigationController = UINavigationController(rootViewController: chatVC)
+//            navigationController.modalPresentationStyle = .fullScreen
+//
+//            window.rootViewController = navigationController
+//            window.makeKeyAndVisible()
+//        }
+//        completionHandler()
+//    }
 
 }

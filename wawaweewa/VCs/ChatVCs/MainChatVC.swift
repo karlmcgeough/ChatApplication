@@ -96,6 +96,7 @@ extension MainChatVC {
         let messengerVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(identifier: "messengerVC") as! MessengerVC
         
         messengerVC.chat = chat
+        messengerVC.chatId = chat.id
         self.navigationController!.pushViewController(messengerVC, animated: true)
     }
 }

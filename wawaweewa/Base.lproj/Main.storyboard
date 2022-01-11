@@ -940,8 +940,8 @@
                                                 </constraints>
                                                 <variation key="default">
                                                     <mask key="constraints">
-                                                        <exclude reference="vgy-jh-KqV"/>
                                                         <exclude reference="0k7-Au-E0l"/>
+                                                        <exclude reference="vgy-jh-KqV"/>
                                                     </mask>
                                                 </variation>
                                                 <variation key="heightClass=compact">
@@ -1037,8 +1037,8 @@
                                                 </constraints>
                                                 <variation key="default">
                                                     <mask key="constraints">
-                                                        <exclude reference="DWa-b9-h06"/>
                                                         <exclude reference="1mP-ki-ivA"/>
+                                                        <exclude reference="DWa-b9-h06"/>
                                                     </mask>
                                                 </variation>
                                                 <variation key="heightClass=compact">
@@ -1161,7 +1161,7 @@
                                                                         <constraint firstAttribute="height" constant="100" id="sMu-0T-QRH"/>
                                                                     </constraints>
                                                                 </imageView>
-                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AS8-6r-qhU">
+                                                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AS8-6r-qhU">
                                                                     <rect key="frame" x="161" y="142" width="38" height="30"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="38" id="YIB-jJ-nDa"/>

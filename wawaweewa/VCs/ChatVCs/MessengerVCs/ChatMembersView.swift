@@ -21,6 +21,7 @@ class ChatMembersView: UIViewController, UICollectionViewDelegate, UICollectionV
     var filteredMemmbers: [User] = []
     var chat: Chat!
     var listener: ListenerRegistration! = nil
+    let currentUserId = Auth.auth().currentUser?.uid
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +30,7 @@ class ChatMembersView: UIViewController, UICollectionViewDelegate, UICollectionV
             if finished {
                 for user in self.members {
                     for id in self.chat.users {
-                        if user.id == id {
+                        if user.id == id && user.id != self.currentUserId{
                             self.filteredMemmbers.append(user)
                         }
                     }

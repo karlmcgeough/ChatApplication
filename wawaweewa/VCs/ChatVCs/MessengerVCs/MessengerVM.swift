@@ -16,7 +16,6 @@ class MessengerVM {
     var chat = Chat()
     var users: [User] = []
     var filtered: [User] = []
-    var fcmTokenArray: [String] = []
     
     func createMessage(messageText: String, chatId: String, tokenArray: [String], view: UIView, _ completion: @escaping ((Bool)-> Void)) {
         getCurrentUser { completed in
@@ -29,7 +28,7 @@ class MessengerVM {
                 
                 let messageDetails = Message.init(id: id, chatId: chatId, sentById: postedById, sentByName: postedByName, messageText: message, timestamp: timestamp)
                 
-                self.postMessage(message: messageDetails, view: view, postedByName: postedByName, messageText: messageText, tokenArray: tokenArray) { success in
+                self.postMessage(message: messageDetails, view: view, postedByName: postedByName, messageText: messageText, tokenArray: tokenArray, chatId: chatId) { success in
                     if success {
                         completion(true)
                     }else {
@@ -43,7 +42,7 @@ class MessengerVM {
         
     }
     
-    private func postMessage(message: Message, view: UIView, postedByName: String, messageText: String,tokenArray: [String], _ completion: @escaping ((Bool) -> Void)) {
+    private func postMessage(message: Message, view: UIView, postedByName: String, messageText: String,tokenArray: [String], chatId: String, _ completion: @escaping ((Bool) -> Void)) {
         let data = Message.modelToData(message: message)
         
         FirebaseReference(.Messages).document(message.id).setData(data) { err in
@@ -52,7 +51,7 @@ class MessengerVM {
             }else {
                 for token in tokenArray {
                     print("+++++++\(token)")
-                    PushNotificationSender().sendPushNotification(to: token, title: "New Message!", body: messageText, sentBy: postedByName)
+                    PushNotificationSender().sendPushNotification(to: token, title: "New Message From \(postedByName)", body: messageText, sentBy: chatId)
                 }
                 print("Posted")
             }
@@ -75,38 +74,22 @@ class MessengerVM {
         }
     }
     
-    func getFCMTokenArray(_ completion: @escaping (_ tokenArray: [String]) -> Void) {
-        var fcmTokens: [String] = []
-        var usersArray: [User] = []
-        getUsers { users in
-            usersArray = users
-        }
-        for user in usersArray {
-            for id in self.chat.users {
-                if user.id == id {
-                    fcmTokens.append(user.fcmToken)
-                }
-            }
-        }
-        completion(fcmTokens)
-    }
-    
-    private func getUsers(_ completion: @escaping (_ users: [User]) -> Void) {
+     func getUsers(_ completion: @escaping (_ users: [User]) -> Void) {
         var usersArray : [User] = []
         FirebaseReference(.User).getDocuments { snapshot, error in
             if let error = error {
                 debugPrint(error.localizedDescription)
                 return
             }
-            
             if !snapshot!.isEmpty {
                 for u in snapshot!.documents {
                     let data = u.data()
                     let user = User.init(data: data)
                     usersArray.append(user)
                 }
+                self.users = usersArray
+                completion(usersArray)
             }
-            completion(usersArray)
         }
     }
     

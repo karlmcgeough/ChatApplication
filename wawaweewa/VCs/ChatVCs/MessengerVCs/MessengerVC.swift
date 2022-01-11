@@ -22,32 +22,43 @@ class MessengerVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UI
     var chat: Chat!
     var messageArray: [Message] = []
     let currentUser = Auth.auth().currentUser?.uid
-    var tokens: [String] = []
+    var filteredFcmTokens : [String] = []
+    var users: [User] = []
+    var chatId: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupView()
         updateChatCheckPasscode()
+        vm.getChat(chatId: chatId) { chats in
+            self.chat = chats
+            self.setupView()
+        }
+        vm.getUsers { users in
+            self.users = users.filter({$0.id != self.currentUser})
+            self.getFilteredTokens()
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.1, execute: {
+                let indexPath = IndexPath(row: self.messageArray.count-1, section: 0)
+                self.messagesTableView.scrollToRow(at: indexPath, at: UITableView.ScrollPosition.bottom, animated: true)
+            })
+        }
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-
-    }
-
     //Actions
     @IBAction func messageSendAction(_ sender: Any) {
         if messageTxtView.text != "" {
-            vm.getFCMTokenArray { tokenArray in
-                self.vm.createMessage(messageText: self.messageTxtView.text, chatId: self.chat.id,tokenArray: tokenArray, view: self.view) { success in
-                    if success {
-                        self.messageTxtView.text = "Write something here.."
-                        self.messageTxtView.textColor = UIColor.lightGray
-                        self.messageSendBtn.isEnabled = false
-                        self.view.endEditing(true)
-                        print("posted")
-                    }else {
-                        print("Error")
-                    }
+            self.vm.createMessage(messageText: self.messageTxtView.text, chatId: self.chat.id,tokenArray: filteredFcmTokens, view: self.view) { success in
+                if success {
+                    self.messageTxtView.text = "Write something here.."
+                    self.messageTxtView.textColor = UIColor.lightGray
+                    self.messageSendBtn.isEnabled = false
+                    self.view.endEditing(true)
+                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.1, execute: {
+                        let indexPath = IndexPath(row: self.messageArray.count-1, section: 0)
+                        self.messagesTableView.scrollToRow(at: indexPath, at: UITableView.ScrollPosition.bottom, animated: true)
+                    })
+                    print("posted")
+                }else {
+                    print("Error")
                 }
             }
         }
@@ -121,7 +132,7 @@ class MessengerVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UI
     }
     
     private func getUpdatedChat(_ completion: @escaping ((Bool) -> Void)) {
-        vm.getChat(chatId: chat.id) { chats in
+        vm.getChat(chatId: chatId) { chats in
             self.chat = chats
             completion(true)
         }
@@ -133,6 +144,14 @@ class MessengerVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UI
                 self.checkShowPasscode()
             } else {
                 print("Error")
+            }
+        }
+    }
+    
+    private func getFilteredTokens() {
+        for user in users {
+            if chat.users.contains(user.id) {
+                filteredFcmTokens.append(user.fcmToken)
             }
         }
     }
@@ -167,7 +186,7 @@ extension MessengerVC {
 extension MessengerVC {
     
     func getMessages() {
-        let chatId = chat.id
+        let chatId = chatId
         
         self.listener = FirebaseReference(.Messages).whereField("chatId", isEqualTo: chatId).order(by: "timeStamp", descending: false).addSnapshotListener({ snapshot, err in
             if let error = err {

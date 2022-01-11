@@ -16,6 +16,7 @@ class Message {
     var sentByName: String
     var messageText: String
     var timeStamp: Timestamp
+    //var readBy: [String]
     
     init(id: String = "", chatId: String = "", sentById: String = "", sentByName: String = "", messageText: String = "", timestamp: Timestamp = Timestamp()) {
         self.id = id
