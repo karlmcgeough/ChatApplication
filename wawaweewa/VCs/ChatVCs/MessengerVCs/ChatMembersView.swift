@@ -18,6 +18,7 @@ class ChatMembersView: UIViewController, UICollectionViewDelegate, UICollectionV
     
     //MARK: Vars
     var members: [User] = []
+    var filteredMemmbers: [User] = []
     var chat: Chat!
     var listener: ListenerRegistration! = nil
     
@@ -26,6 +27,14 @@ class ChatMembersView: UIViewController, UICollectionViewDelegate, UICollectionV
         setupView()
         getUsers { finished in
             if finished {
+                for user in self.members {
+                    for id in self.chat.users {
+                        if user.id == id {
+                            self.filteredMemmbers.append(user)
+                        }
+                    }
+                }
+                self.membersCV.reloadData()
                 UIHelpers.hideLoadingAlert()
             }
         }
@@ -45,71 +54,36 @@ class ChatMembersView: UIViewController, UICollectionViewDelegate, UICollectionV
 extension ChatMembersView {
     
     private func getUsers(_ completion: @escaping ((Bool) -> Void)) {
-        self.listener = FirebaseReference(.User).addSnapshotListener({ snap, err in
-            if let error = err {
+        
+        FirebaseReference(.User).getDocuments { snapshot, error in
+            if let error = error {
                 debugPrint(error.localizedDescription)
                 return
             }
-            snap?.documentChanges.forEach({ c in
-                let data = c.document.data()
-                let user = User.init(data: data)
-                
-                switch c.type {
-                case .added:
-                    self.onDocumentAdded(change: c, user: user)
-                case .modified:
-                    self.onDocumentModified(change: c, user: user)
-                case .removed:
-                    self.onDocumentRemoved(change: c)
+            
+            if !snapshot!.isEmpty {
+                for u in snapshot!.documents {
+                    let data = u.data()
+                    let user = User.init(data: data)
+                    self.members.append(user)
                 }
-            })
-        })
-    }
-    
-    //MARK:Functions
-        func onDocumentAdded(change: DocumentChange, user: User) {
-            let newIndex = Int(change.newIndex)
-            members.insert(user, at: newIndex)
-            membersCV.insertItems(at:  [IndexPath(item: newIndex, section: 0)])
-        }
-        
-        func onDocumentModified(change: DocumentChange, user: User) {
-            if change.newIndex == change.oldIndex {
-                
-                // Row modified but stayed in same position
-                let index = Int(change.newIndex)
-                members[index] = user
-                membersCV.reloadItems(at:[IndexPath(item: index, section: 0)])
-            } else {
-                
-                // Row changed and moved position
-                let oldIndex = Int(change.oldIndex)
-                let newIndex = Int(change.newIndex)
-                members.remove(at: oldIndex)
-                members.insert(user, at: newIndex)
-                membersCV.moveItem(at:IndexPath(item: oldIndex, section: 0), to: IndexPath(item: newIndex, section: 0))
             }
+            completion(true)
         }
-        
-        func onDocumentRemoved(change: DocumentChange) {
-            let oldIndex = Int(change.oldIndex)
-            members.remove(at: oldIndex)
-            membersCV.deleteItems(at: [IndexPath(item: oldIndex, section: 0)])
-        }
-     
+    }
 }
 
 //Table view methods
 extension ChatMembersView {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return members.count
+        return filteredMemmbers.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = membersCV.dequeueReusableCell(withReuseIdentifier: "membersCell", for: indexPath) as! MembersCell
         cell.shadowDecorate()
-        cell.configureCell(user: members[indexPath.row])
+        cell.configureCell(user: filteredMemmbers[indexPath.row])
         cell.blockUserActionBlock = {
             
         }

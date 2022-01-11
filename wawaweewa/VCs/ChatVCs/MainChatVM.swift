@@ -12,6 +12,7 @@ import Firebase
 class MainChatVM {
     
     var chats = [Chat]()
+    var user = User()
     
     func getChatsFromFirebase(completion: @escaping (_ chats: [Chat]) -> Void) {
         var chatArray: [Chat] = []
@@ -30,8 +31,32 @@ class MainChatVM {
             }
         }
     }
+    
+    func logOutUser(completion: @escaping (_ error: Error?) -> Void) {
+        do {
+            try Auth.auth().signOut()
+            completion(nil)
+        } catch let error as NSError {
+            completion(error)
+        }
+    }
+    
+    func getCurrentUser(_ completion: @escaping (_ user: User) -> Void) {
+        let userId = Auth.auth().currentUser?.uid
+        FirebaseReference(.User).document(userId!).getDocument { snap, err in
+            guard let snapshot = snap else {return}
+            
+            if snapshot.exists {
+                let data = snapshot.data()
+                self.user = User.init(data: data!)
+                completion(self.user)
+            }else {
+                print(err?.localizedDescription)
+            }
+        }
+    }
+    
 }
-
 //Create New Chat methods
 extension MainChatVM {
     

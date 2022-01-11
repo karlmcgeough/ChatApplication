@@ -47,6 +47,8 @@
 		B9FB8428278CE0EC002BF098 /* ChatMembersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FB8427278CE0EC002BF098 /* ChatMembersView.swift */; };
 		B9FB842B278CE4AF002BF098 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = B9FB842A278CE4AF002BF098 /* Kingfisher */; };
 		B9FB842D278CE790002BF098 /* MembersCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FB842C278CE78F002BF098 /* MembersCell.swift */; };
+		B9FB8431278D0FF6002BF098 /* PushNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FB8430278D0FF6002BF098 /* PushNotificationManager.swift */; };
+		B9FB8433278D1002002BF098 /* PushNotificationSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FB8432278D1001002BF098 /* PushNotificationSender.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -87,6 +89,8 @@
 		B9FB8425278CAD22002BF098 /* PasscodeCheckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasscodeCheckView.swift; sourceTree = "<group>"; };
 		B9FB8427278CE0EC002BF098 /* ChatMembersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMembersView.swift; sourceTree = "<group>"; };
 		B9FB842C278CE78F002BF098 /* MembersCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MembersCell.swift; sourceTree = "<group>"; };
+		B9FB8430278D0FF6002BF098 /* PushNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationManager.swift; sourceTree = "<group>"; };
+		B9FB8432278D1001002BF098 /* PushNotificationSender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationSender.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,6 +157,7 @@
 			isa = PBXGroup;
 			children = (
 				B9C4E114278B539A00162EA4 /* wawaweewa.entitlements */,
+				B9FB842E278D0FD3002BF098 /* Services */,
 				7586CEFC2785D17A000BCF4C /* Helpers */,
 				7586CEFB2785D16E000BCF4C /* Extensions */,
 				7586CEFA2785D15B000BCF4C /* Models */,
@@ -246,6 +251,23 @@
 				B930CDC1278676BB00223703 /* chatCell.swift */,
 			);
 			path = ChatCells;
+			sourceTree = "<group>";
+		};
+		B9FB842E278D0FD3002BF098 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				B9FB842F278D0FE0002BF098 /* PushNotifications */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		B9FB842F278D0FE0002BF098 /* PushNotifications */ = {
+			isa = PBXGroup;
+			children = (
+				B9FB8430278D0FF6002BF098 /* PushNotificationManager.swift */,
+				B9FB8432278D1001002BF098 /* PushNotificationSender.swift */,
+			);
+			path = PushNotifications;
 			sourceTree = "<group>";
 		};
 		ED7562CAB98C580747AF6F66 /* Frameworks */ = {
@@ -393,6 +415,7 @@
 				7586CEFE2785D193000BCF4C /* MainChatVM.swift in Sources */,
 				7586CEDC2785CC8E000BCF4C /* AppDelegate.swift in Sources */,
 				B9FB8424278CA96C002BF098 /* ManageChatView.swift in Sources */,
+				B9FB8433278D1002002BF098 /* PushNotificationSender.swift in Sources */,
 				7586CEF72785D126000BCF4C /* MainChatVC.swift in Sources */,
 				7586CF022785D1C9000BCF4C /* UIExtensions.swift in Sources */,
 				7586CF002785D1BE000BCF4C /* UIHelpers.swift in Sources */,
@@ -403,6 +426,7 @@
 				7586CF1E27862321000BCF4C /* CreateNewChatVC.swift in Sources */,
 				7586CF1A27860E19000BCF4C /* FirestoreCollectionReference.swift in Sources */,
 				7586CEDE2785CC8E000BCF4C /* SceneDelegate.swift in Sources */,
+				B9FB8431278D0FF6002BF098 /* PushNotificationManager.swift in Sources */,
 				7586CF132785F4A9000BCF4C /* LoginVM.swift in Sources */,
 				7586CF152785F4B8000BCF4C /* RegisterVM.swift in Sources */,
 				B9FB8428278CE0EC002BF098 /* ChatMembersView.swift in Sources */,

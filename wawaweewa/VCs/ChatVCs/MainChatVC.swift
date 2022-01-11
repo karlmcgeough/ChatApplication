@@ -17,12 +17,20 @@ class MainChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var chatArray: [Chat] = []
     var vm = MainChatVM()
     let refreshControl = UIRefreshControl()
+    var currentUser: User!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         chatNameTV.delegate = self
         chatNameTV.dataSource = self
         setupRefreshControl()
+        
+        vm.getCurrentUser { user in
+            self.currentUser = user
+            let currentUserId = self.currentUser.id
+            let pushManager = PushNotificationManager(userID: currentUserId)
+            pushManager.registerForPushNotifications(currentToken: self.currentUser.fcmToken)
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -37,8 +45,17 @@ class MainChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     
     @IBAction func profileAction(_ sender: Any) {
-        do { try Auth.auth().signOut() }
-        catch { print("already logged out") }
+        vm.logOutUser { error in
+            if error == nil {
+                if let storyboard = self.storyboard {
+                    let loginVC = storyboard.instantiateViewController(withIdentifier: "loginVC")
+                    self.view.window?.rootViewController = loginVC
+                    self.view.window?.makeKeyAndVisible()
+                }
+            }else {
+                print("Error logging user out")
+            }
+        }
     }
     
     @objc func refresh(_ sender: AnyObject) {

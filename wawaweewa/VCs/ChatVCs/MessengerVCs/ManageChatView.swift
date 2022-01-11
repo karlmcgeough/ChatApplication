@@ -63,6 +63,8 @@ class ManageChatView: UIViewController {
         }
         viewController.chat = chat
         let bottomSheetController = BottomSheetController(contentViewController: viewController)
+        bottomSheetController.backgroundColor = .clear
+        bottomSheetController.contentBackgroundColor = UIColor(named: "backgroundGray")!
         present(bottomSheetController, animated: true)
     }
 }

@@ -17,7 +17,6 @@ class LoginVM {
     
     //MARK: Firebase methods
     func loginUser(email: String, password: String, view: UIView, _ completion: @escaping ((Bool)-> Void)) {
-        UIHelpers.showLoadingAlert(view: view)
         
         Auth.auth().signIn(withEmail: email, password: password) { result, err in
             if err != nil {
@@ -26,7 +25,6 @@ class LoginVM {
                 self.appDelegate.userDefault.set(true, forKey: "userSignedIn")
                 completion(true)
             }
-            UIHelpers.hideLoadingAlert()
         }
     }
 }

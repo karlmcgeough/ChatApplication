@@ -37,8 +37,11 @@ class UIHelpers {
     }
     
     static func hideLoadingAlert() {
-        let hud = JGProgressHUD(automaticStyle: ())
-        hud.dismiss()
+        DispatchQueue.main.async {
+            let hud = JGProgressHUD(automaticStyle: ())
+            hud.removeFromSuperview()
+            hud.dismiss()
+        }
     }
     
 }
